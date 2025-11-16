@@ -1,8 +1,11 @@
-/* Основные стили для газетного фона и шрифтов */
+/* ================================================= */
+/* 1. БАЗОВЫЕ СТИЛИ (Для больших экранов) */
+/* ================================================= */
+
 body {
-    font-family: 'Roboto', sans-serif; /* Основной текст */
-    background-color: #f9f7f1; /* Светлый кремовый фон, как у старой бумаги */
-    color: #333; /* Темно-серый текст */
+    font-family: 'Roboto', sans-serif; 
+    background-color: #f9f7f1; 
+    color: #333; 
     line-height: 1.6;
     margin: 20px;
 }
@@ -22,7 +25,7 @@ header {
 }
 
 header h1 {
-    font-family: 'Playfair Display', serif; /* Более "старомодный" заголовок */
+    font-family: 'Playfair Display', serif; 
     font-size: 4em;
     font-weight: 700;
     margin: 0;
@@ -35,35 +38,16 @@ header h1 {
     font-style: italic;
 }
 
-/* Стили для статьи (главный газетный эффект) */
+/* Стили для статьи (ГАЗЕТНЫЙ ЭФФЕКТ - Две колонки) */
 .article {
-    /* !!! ЭТО РАЗБИВАЕТ ТЕКСТ НА ДВЕ КОЛОНКИ !!! */
     column-count: 2;
     column-gap: 40px; 
     text-align: justify;
     padding-top: 20px;
 }
 
-.article h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.2em;
-    font-weight: 700;
-    /* Это заставляет заголовок растягиваться на обе колонки */
-    column-span: all; 
-    margin-top: 0;
-    margin-bottom: 15px;
-}
-
-.lead-paragraph {
-    font-size: 1.1em;
-    font-weight: 700;
-    column-span: all;
-    margin-bottom: 20px;
-}
-
-/* Стили для видео-блока в правом верхнем углу */
+/* Стили для видео-блока (СПРАВА НА БОЛЬШОМ ЭКРАНЕ) */
 .video-ad {
-    /* !!! ЭТО ПРИЖИМАЕТ БЛОК К ПРАВОЙ СТОРОНЕ !!! */
     float: right; 
     width: 300px; 
     margin-left: 30px; 
@@ -74,23 +58,53 @@ header h1 {
     box-shadow: 2px 2px 5px rgba(0,0,0,0.1); 
 }
 
-.video-ad h3 {
+/* Стили заголовков и параграфов, растягивающихся на обе колонки */
+.article h2, .lead-paragraph {
+    column-span: all;
     font-family: 'Playfair Display', serif;
-    font-size: 1.2em;
-    text-align: center;
-    border-bottom: 1px dashed #ccc;
-    padding-bottom: 5px;
+}
+.article h2 {
+    font-size: 2.2em;
     margin-top: 0;
 }
-
-.video-ad .caption {
-    font-size: 0.8em;
-    text-align: center;
-    font-style: italic;
+.lead-paragraph {
+    font-size: 1.1em;
+    font-weight: 700;
+    margin-bottom: 20px;
 }
-
 .video-ad video {
     display: block;
     max-width: 100%;
     height: auto;
+}
+
+/* ================================================= */
+/* 2. МЕДИАЗАПРОС: СТИЛИ ДЛЯ ТЕЛЕФОНОВ И УЗКИХ ЭКРАНОВ */
+/* ================================================= */
+
+/* Когда ширина экрана МЕНЬШЕ или РАВНА 768px */
+@media (max-width: 768px) {
+    
+    body {
+        margin: 10px; /* Уменьшаем общие поля */
+    }
+
+    /* ОТКЛЮЧАЕМ КОЛОНКИ: делаем текст в одну колонку для удобства чтения */
+    .article {
+        column-count: 1;
+        column-gap: 0;
+    }
+    
+    /* УБИРАЕМ FLOAT: видео больше не прижимается справа, а занимает всю ширину */
+    .video-ad {
+        float: none; /* Убираем привязку к правому краю */
+        width: 100%; /* Делаем ширину 100% от контейнера */
+        margin: 15px 0; /* Добавляем отступы сверху и снизу */
+        box-sizing: border-box; /* Чтобы padding не увеличивал ширину */
+    }
+    
+    /* Уменьшаем размер главного заголовка, чтобы он влез на экран */
+    header h1 {
+        font-size: 2.5em; 
+    }
 }
